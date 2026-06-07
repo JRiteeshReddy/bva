@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useForm, ValidationError } from "@formspree/react";
 import { SectionHeading, FadeIn } from "@/components/ui/SectionHeading";
 import { socialLinks } from "@/data/site-data";
 
@@ -30,9 +29,42 @@ const socialIcons: Record<string, React.ReactNode> = {
 };
 
 export default function Contact() {
-  const [state, handleSubmit] = useForm("mjgdylqn");
+  const [succeeded, setSucceeded] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState<string | null>(null);
   const [source, setSource] = useState("contact");
   const [messageDefault, setMessageDefault] = useState("");
+
+  // Simple fetch-based submit to Formspree to avoid depending on @formspree/react in builds
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitting(true);
+    setErrors(null);
+
+    try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      // Post to Formspree endpoint (uses the same form id as before)
+      const endpoint = "https://formspree.io/f/mjgdylqn";
+      const res = await fetch(endpoint, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setSucceeded(true);
+        form.reset();
+      } else {
+        const data = await res.json().catch(() => null);
+        setErrors((data && data.error) || "Submission failed. Please try again.");
+      }
+    } catch (err) {
+      setErrors("Submission failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   useEffect(() => {
     try {
@@ -61,7 +93,7 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <FadeIn direction="left">
-            {state.succeeded ? (
+            {succeeded ? (
               <div
                 className="card-glow rounded-2xl p-8 text-center"
                 aria-live="polite"
@@ -84,7 +116,6 @@ export default function Contact() {
                   placeholder="Your name"
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all"
                 />
-                <ValidationError field="name" errors={state.errors} />
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-neutral-400 mb-2">
@@ -98,7 +129,6 @@ export default function Contact() {
                   placeholder="you@example.com"
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all"
                 />
-                <ValidationError field="email" errors={state.errors} />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-neutral-400 mb-2">
@@ -113,17 +143,18 @@ export default function Contact() {
                   placeholder="Tell us about yourself..."
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all resize-none"
                 />
-                <ValidationError field="message" errors={state.errors} />
               </div>
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                disabled={state.submitting}
+                disabled={submitting}
                 className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-white to-neutral-400 text-black glow-button disabled:opacity-60"
               >
-                {state.submitting ? "Sending..." : "Send Message"}
+                {submitting ? "Sending..." : "Send Message"}
               </motion.button>
+
+              {errors && <div className="text-rose-400 mt-3">{errors}</div>}
               </form>
             )}
           </FadeIn>
