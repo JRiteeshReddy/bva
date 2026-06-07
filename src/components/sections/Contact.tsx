@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { SectionHeading, FadeIn } from "@/components/ui/SectionHeading";
 import { socialLinks } from "@/data/site-data";
@@ -30,6 +31,23 @@ const socialIcons: Record<string, React.ReactNode> = {
 
 export default function Contact() {
   const [state, handleSubmit] = useForm("mjgdylqn");
+  const [source, setSource] = useState("contact");
+  const [messageDefault, setMessageDefault] = useState("");
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const s = params.get("source");
+      if (s) {
+        setSource(s);
+        if (s === "internship") {
+          setMessageDefault("I\'d like to apply for the BVA Internship Program. Here's a short intro about me:\n\n");
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, []);
 
   return (
     <section id="contact" className="relative py-24 md:py-32">
@@ -53,6 +71,7 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
+                <input type="hidden" name="form_source" value={source} />
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-neutral-400 mb-2">
                   Name
@@ -90,6 +109,7 @@ export default function Contact() {
                   name="message"
                   required
                   rows={5}
+                  defaultValue={messageDefault}
                   placeholder="Tell us about yourself..."
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all resize-none"
                 />
