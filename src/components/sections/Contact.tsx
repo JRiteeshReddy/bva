@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
+import { useForm, ValidationError } from "@formspree/react";
 import { SectionHeading, FadeIn } from "@/components/ui/SectionHeading";
 import { socialLinks } from "@/data/site-data";
 
@@ -29,12 +29,7 @@ const socialIcons: Record<string, React.ReactNode> = {
 };
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  const [state, handleSubmit] = useForm("mjgdylqn");
 
   return (
     <section id="contact" className="relative py-24 md:py-32">
@@ -48,18 +43,29 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <FadeIn direction="left">
-            <form onSubmit={handleSubmit} className="space-y-5">
+            {state.succeeded ? (
+              <div
+                className="card-glow rounded-2xl p-8 text-center"
+                aria-live="polite"
+              >
+                <h3 className="text-xl font-semibold text-white mb-2">Thanks — message received</h3>
+                <p className="text-neutral-400">We&apos;ll get back to you shortly.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-neutral-400 mb-2">
                   Name
                 </label>
                 <input
                   id="name"
+                  name="name"
                   type="text"
                   required
                   placeholder="Your name"
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all"
                 />
+                <ValidationError field="name" errors={state.errors} />
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-neutral-400 mb-2">
@@ -67,11 +73,13 @@ export default function Contact() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   required
                   placeholder="you@example.com"
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all"
                 />
+                <ValidationError field="email" errors={state.errors} />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-neutral-400 mb-2">
@@ -79,21 +87,25 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   required
                   rows={5}
                   placeholder="Tell us about yourself..."
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-neutral-600 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all resize-none"
                 />
+                <ValidationError field="message" errors={state.errors} />
               </div>
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-white to-neutral-400 text-black glow-button"
+                disabled={state.submitting}
+                className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-white to-neutral-400 text-black glow-button disabled:opacity-60"
               >
-                {submitted ? "Message Sent! ✓" : "Send Message"}
+                {state.submitting ? "Sending..." : "Send Message"}
               </motion.button>
-            </form>
+              </form>
+            )}
           </FadeIn>
 
           <FadeIn direction="right" delay={0.2}>
