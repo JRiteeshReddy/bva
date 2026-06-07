@@ -57,7 +57,7 @@ export default function Internship() {
                   Open to students and early-career builders in Bangalore. Remote-friendly with weekly
                   in-person sessions.
                 </p>
-                <GlowButton href="#contact" variant="primary">
+                <GlowButton href="/apply" variant="primary" target="_blank" rel="noopener noreferrer">
                   Apply Now
                 </GlowButton>
               </div>

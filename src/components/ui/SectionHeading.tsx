@@ -71,6 +71,8 @@ interface GlowButtonProps {
   onClick?: () => void;
   type?: "button" | "submit";
   className?: string;
+  target?: string;
+  rel?: string;
 }
 
 export function GlowButton({
@@ -80,6 +82,8 @@ export function GlowButton({
   onClick,
   type = "button",
   className = "",
+  target,
+  rel,
 }: GlowButtonProps) {
   const baseStyles =
     "inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-sm md:text-base transition-all duration-300 cursor-pointer";
@@ -99,6 +103,8 @@ export function GlowButton({
     return (
       <motion.a
         href={href}
+        target={target}
+        rel={rel}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.98 }}
         className={combined}
