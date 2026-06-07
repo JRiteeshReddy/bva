@@ -1,4 +1,4 @@
-import { createClient } from "contentful";
+import { createClient, type Entry } from "contentful";
 
 export interface ContentfulProject {
   id: string;
@@ -7,6 +7,14 @@ export interface ContentfulProject {
   description: string;
   image: string;
   link: string;
+}
+
+interface ProjectFields {
+  Title?: string;
+  By?: string;
+  description?: string;
+  demo?: { fields?: { file?: { url?: string } } };
+  url?: string;
 }
 
 const client = createClient({
@@ -20,7 +28,7 @@ export async function getProjects(): Promise<ContentfulProject[]> {
       content_type: "project",
     });
 
-    return res.items.map((item: any) => {
+    return res.items.map((item: Entry<ProjectFields>) => {
       const f = item.fields;
       return {
         id: item.sys.id,

@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { GlowButton } from "@/components/ui/SectionHeading";
 import { getProjects } from "@/lib/contentful";
 import ProjectCard from "./ProjectCard";
 
