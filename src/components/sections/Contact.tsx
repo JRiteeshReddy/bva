@@ -187,8 +187,8 @@ export default function Contact() {
               <div className="mt-8 pt-8 border-t border-white/5">
                 <p className="text-sm text-neutral-500">
                   <span className="text-neutral-400">Email:</span>{" "}
-                  <a href="mailto:hello@bva.community" className="text-white hover:underline">
-                    hello@bva.community
+                  <a href="mailto:blrvibecoders@gmail.com" className="text-white hover:underline">
+                    blrvibecoders@gmail.com
                   </a>
                 </p>
                 <p className="text-sm text-neutral-500 mt-2">
