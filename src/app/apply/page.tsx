@@ -53,27 +53,22 @@ export default function ApplyPage() {
     setErrors({});
 
     try {
-      // Using Formspree endpoint (user should replace with their own)
-      const endpoint = "https://formspree.io/f/mknajqdo"; // placeholder
+      // Post to Formspree (use same form endpoint as Contact)
+      const endpoint = "https://formspree.io/f/mjgdylqn";
+      const formEl = e.currentTarget;
+      const formData = new FormData(formEl);
+      // Add a tag so backend can distinguish forms
+      formData.append("form_source", "internship");
+
       const res = await fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: form.firstName,
-          lastName: form.lastName,
-          email: form.email,
-          phone: form.phone,
-          role: form.role,
-          level: form.level,
-          why: form.why,
-          built: form.built,
-          link: form.link,
-          availability: form.availability,
-        }),
+        body: formData,
+        headers: { Accept: "application/json" },
       });
 
       if (res.ok) {
         setStatus("success");
+        setErrors({});
         setForm({
           firstName: "",
           lastName: "",
@@ -88,6 +83,13 @@ export default function ApplyPage() {
         });
       } else {
         setStatus("error");
+        // try to parse error message
+        try {
+          const data = await res.json();
+          if (data && data.error) setErrors({ form: data.error });
+        } catch (err) {
+          // ignore
+        }
       }
     } catch (err) {
       setStatus("error");
@@ -105,11 +107,13 @@ export default function ApplyPage() {
           </p>
 
           <form onSubmit={onSubmit} className="space-y-4">
+            <input type="hidden" name="form_source" value="internship" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="flex flex-col">
                 <span className="text-sm text-neutral-300 mb-1">First Name *</span>
                 <input
                   required
+                  name="firstName"
                   value={form.firstName}
                   onChange={(e) => update("firstName", e.target.value)}
                   id="firstName"
@@ -122,6 +126,7 @@ export default function ApplyPage() {
                 <span className="text-sm text-neutral-300 mb-1">Last Name *</span>
                 <input
                   required
+                  name="lastName"
                   value={form.lastName}
                   onChange={(e) => update("lastName", e.target.value)}
                   id="lastName"
@@ -136,6 +141,7 @@ export default function ApplyPage() {
                 <span className="text-sm text-neutral-300 mb-1">Email *</span>
                 <input
                   required
+                  name="email"
                   type="email"
                   value={form.email}
                   onChange={(e) => update("email", e.target.value)}
@@ -148,6 +154,7 @@ export default function ApplyPage() {
               <label className="flex flex-col">
                 <span className="text-sm text-neutral-300 mb-1">Phone</span>
                 <input
+                  name="phone"
                   value={form.phone}
                   onChange={(e) => update("phone", e.target.value)}
                   id="phone"
@@ -195,6 +202,7 @@ export default function ApplyPage() {
               <span className="text-sm text-neutral-300 mb-1">Why do you want to join BVA? *</span>
                 <textarea
                   required
+                  name="why"
                   value={form.why}
                   onChange={(e) => update("why", e.target.value)}
                   rows={5}
@@ -207,6 +215,7 @@ export default function ApplyPage() {
             <label className="flex flex-col">
               <span className="text-sm text-neutral-300 mb-1">What have you built before?</span>
                 <textarea
+                  name="built"
                   placeholder="Projects, links, or anything you've worked on"
                   value={form.built}
                   onChange={(e) => update("built", e.target.value)}
@@ -219,7 +228,7 @@ export default function ApplyPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="flex flex-col">
                 <span className="text-sm text-neutral-300 mb-1">Portfolio / GitHub / Link</span>
-                <input value={form.link} onChange={(e) => update("link", e.target.value)} id="link" className="input bg-transparent" />
+                <input name="link" value={form.link} onChange={(e) => update("link", e.target.value)} id="link" className="input bg-transparent" />
               </label>
 
               <label className="flex flex-col">
