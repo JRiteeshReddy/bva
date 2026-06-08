@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   description:
     "Helping young vibe coders turn ideas into real products using AI. Join Bangalore's premier AI builder community.",
   keywords: ["BVA", "vibe coding", "AI", "Bangalore", "community", "builders"],
+  icons: {
+    icon: '/favicon.png',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({
