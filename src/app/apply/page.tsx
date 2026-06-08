@@ -75,7 +75,7 @@ export default function ApplyPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="max-w-3xl w-full">
-        <div className="card-glow rounded-2xl p-8">
+        <div className="card-glow rounded-2xl p-8 form-dark">
           <h1 className="text-2xl font-bold mb-2 gradient-text">Apply — BVA Internship</h1>
           <p className="text-neutral-400 mb-6">
             This is a build-first internship. Selected candidates will be expected to ship real
@@ -90,7 +90,7 @@ export default function ApplyPage() {
                   required
                   value={form.firstName}
                   onChange={(e) => update("firstName", e.target.value)}
-                  className="input"
+                  className="input bg-transparent"
                 />
               </label>
 
@@ -100,7 +100,7 @@ export default function ApplyPage() {
                   required
                   value={form.lastName}
                   onChange={(e) => update("lastName", e.target.value)}
-                  className="input"
+                  className="input bg-transparent"
                 />
               </label>
             </div>
@@ -113,7 +113,7 @@ export default function ApplyPage() {
                   type="email"
                   value={form.email}
                   onChange={(e) => update("email", e.target.value)}
-                  className="input"
+                  className="input bg-transparent"
                 />
               </label>
 
@@ -122,7 +122,7 @@ export default function ApplyPage() {
                 <input
                   value={form.phone}
                   onChange={(e) => update("phone", e.target.value)}
-                  className="input"
+                  className="input bg-transparent"
                 />
               </label>
             </div>
@@ -134,7 +134,7 @@ export default function ApplyPage() {
                   required
                   value={form.role}
                   onChange={(e) => update("role", e.target.value)}
-                  className="input"
+                  className="input bg-transparent"
                 >
                   <option>AI Builder Intern</option>
                   <option>Full Stack / Vibe Developer Intern</option>
@@ -151,7 +151,7 @@ export default function ApplyPage() {
                   required
                   value={form.level}
                   onChange={(e) => update("level", e.target.value)}
-                  className="input"
+                  className="input bg-transparent"
                 >
                   <option>Beginner</option>
                   <option>Intermediate</option>
@@ -162,30 +162,30 @@ export default function ApplyPage() {
 
             <label className="flex flex-col">
               <span className="text-sm text-neutral-300 mb-1">Why do you want to join BVA? *</span>
-              <textarea
-                required
-                value={form.why}
-                onChange={(e) => update("why", e.target.value)}
-                rows={5}
-                className="input"
-              />
+                <textarea
+                  required
+                  value={form.why}
+                  onChange={(e) => update("why", e.target.value)}
+                  rows={5}
+                  className="input bg-transparent"
+                />
             </label>
 
             <label className="flex flex-col">
               <span className="text-sm text-neutral-300 mb-1">What have you built before?</span>
-              <textarea
-                placeholder="Projects, links, or anything you've worked on"
-                value={form.built}
-                onChange={(e) => update("built", e.target.value)}
-                rows={3}
-                className="input"
-              />
+                <textarea
+                  placeholder="Projects, links, or anything you've worked on"
+                  value={form.built}
+                  onChange={(e) => update("built", e.target.value)}
+                  rows={3}
+                  className="input bg-transparent"
+                />
             </label>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="flex flex-col">
                 <span className="text-sm text-neutral-300 mb-1">Portfolio / GitHub / Link</span>
-                <input value={form.link} onChange={(e) => update("link", e.target.value)} className="input" />
+                <input value={form.link} onChange={(e) => update("link", e.target.value)} className="input bg-transparent" />
               </label>
 
               <label className="flex flex-col">
@@ -194,7 +194,7 @@ export default function ApplyPage() {
                   required
                   value={form.availability}
                   onChange={(e) => update("availability", e.target.value)}
-                  className="input"
+                  className="input bg-transparent"
                 >
                   <option>5-10 hrs/week</option>
                   <option>10-20 hrs/week</option>
@@ -206,7 +206,7 @@ export default function ApplyPage() {
             <div className="flex items-center justify-between">
               <div className="text-sm text-neutral-400">This is a build-first internship.</div>
               <button className="bg-gradient-to-r from-white/90 to-neutral-400 text-black px-6 py-2 rounded-full font-semibold" type="submit">
-                Apply Now 🚀
+                Apply Now
               </button>
             </div>
           </form>
