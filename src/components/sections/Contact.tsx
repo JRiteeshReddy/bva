@@ -177,7 +177,7 @@ export default function Contact() {
                   aria-label="Join the BVA WhatsApp community"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-white font-semibold glow-button hover:scale-105 transition-all duration-200 border border-white/5"
+                className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-white/12 to-white/6 text-white font-semibold glow-button hover:scale-105 transition-all duration-200 border border-white/10"
                 >
                   <span className="w-5 h-5 flex items-center justify-center">{socialIcons.whatsapp}</span>
                   <span>Join the BVA WhatsApp</span>
