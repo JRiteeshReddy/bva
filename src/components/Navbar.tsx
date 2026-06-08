@@ -46,10 +46,8 @@ export default function Navbar() {
         transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
         className="relative mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 outline-glass backdrop-blur-2xl border"
       >
-        <a href="#" className="relative z-10 flex items-center gap-2 group shrink-0">
-          <div className="w-7 h-7 rounded-md bg-gradient-to-br from-white to-neutral-500 flex items-center justify-center">
-            <span className="text-black font-bold text-xs">B</span>
-          </div>
+        <a href="#" className="relative z-10 flex items-center gap-3 group shrink-0">
+          <img src="/bva.png" alt="BVA" className="w-8 h-8 object-contain" />
           <span className="font-bold text-base tracking-tight text-white group-hover:text-white/80 transition-colors">
             BVA
           </span>
