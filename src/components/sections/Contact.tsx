@@ -26,6 +26,11 @@ const socialIcons: Record<string, React.ReactNode> = {
       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.127 0 2.063 2.063 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
     </svg>
   ),
+  whatsapp: (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.94 11.94 0 0012 0C5.373 0 0 5.373 0 12c0 2.106.55 4.154 1.593 5.958L0 24l6.293-1.644A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12 0-3.197-1.25-6.187-3.48-8.52zM12 21.8c-1.07 0-2.118-.185-3.09-.545l-.223-.082-3.74.977.998-3.64-.073-.242A8.03 8.03 0 014 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8zm4.39-5.74c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.44-1.34-1.68-.14-.24-.02-.36.1-.48.1-.1.24-.25.36-.37.12-.12.16-.2.24-.34.08-.14.04-.26-.02-.36-.06-.1-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42-.14 0-.3-.02-.46-.02-.16 0-.42.06-.64.3-.22.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.16 1.72 2.64 4.18 3.7 2.46 1.06 2.46.7 2.9.66.44-.04 1.44-.58 1.64-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z" />
+    </svg>
+  ),
 };
 
 export default function Contact() {
@@ -163,8 +168,8 @@ export default function Contact() {
             <div className="card-glow rounded-2xl p-8 h-full flex flex-col justify-center">
               <h3 className="text-xl font-semibold text-white mb-4">Connect with us</h3>
               <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                Follow BVA on social media for updates on events, project launches, and community highlights.
-                Or reach out directly — we&apos;d love to hear from you.
+                Join our WhatsApp community for updates on events, project launches, and community highlights.
+                Or reach out directly — we'd love to hear from you.
               </p>
 
               <div className="flex gap-4">
@@ -173,6 +178,8 @@ export default function Contact() {
                     key={link.name}
                     href={link.href}
                     aria-label={link.name}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all duration-300"
                   >
                     {socialIcons[link.icon]}

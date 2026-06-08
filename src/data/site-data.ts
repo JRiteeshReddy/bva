@@ -112,10 +112,11 @@ export const projects: Project[] = [
 ];
 
 export const socialLinks = [
-  { name: "Twitter", href: "#", icon: "twitter" },
-  { name: "GitHub", href: "#", icon: "github" },
-  { name: "Discord", href: "#", icon: "discord" },
-  { name: "LinkedIn", href: "#", icon: "linkedin" },
+  {
+    name: "WhatsApp",
+    href: "https://chat.whatsapp.com/DVhWXNeuf6xK1DVkIWkG9p",
+    icon: "whatsapp",
+  },
 ];
 
 export const footerLinks = [
