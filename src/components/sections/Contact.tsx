@@ -168,19 +168,19 @@ export default function Contact() {
             <div className="card-glow rounded-2xl p-8 h-full flex flex-col justify-center">
               <h3 className="text-xl font-semibold text-white mb-4">Connect with us</h3>
               <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                Join the WhatsApp community.
+                Join the BVA WhatsApp community for event updates, project showcases, quick help during builds, and casual mentorship. Share your work, ask for feedback, and connect with local builders.
               </p>
 
               <div className="flex gap-4">
                 <a
                   href="https://chat.whatsapp.com/DVhWXNeuf6xK1DVkIWkG9p"
-                  aria-label="Join WhatsApp community"
+                  aria-label="Join the BVA WhatsApp community"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-br from-green-600 to-green-500 text-white font-semibold hover:opacity-95 transition-all duration-200"
+                  className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 text-white font-semibold glow-button hover:scale-105 transition-all duration-200 border border-white/5"
                 >
                   <span className="w-5 h-5 flex items-center justify-center">{socialIcons.whatsapp}</span>
-                  <span>Join WhatsApp</span>
+                  <span>Join the BVA WhatsApp</span>
                 </a>
               </div>
 
