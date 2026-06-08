@@ -168,23 +168,20 @@ export default function Contact() {
             <div className="card-glow rounded-2xl p-8 h-full flex flex-col justify-center">
               <h3 className="text-xl font-semibold text-white mb-4">Connect with us</h3>
               <p className="text-neutral-400 text-sm leading-relaxed mb-8">
-                Join our WhatsApp community for updates on events, project launches, and community highlights.
-                Or reach out directly — we'd love to hear from you.
+                Join the WhatsApp community.
               </p>
 
               <div className="flex gap-4">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    aria-label={link.name}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all duration-300"
-                  >
-                    {socialIcons[link.icon]}
-                  </a>
-                ))}
+                <a
+                  href="https://chat.whatsapp.com/DVhWXNeuf6xK1DVkIWkG9p"
+                  aria-label="Join WhatsApp community"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-br from-green-600 to-green-500 text-white font-semibold hover:opacity-95 transition-all duration-200"
+                >
+                  <span className="w-5 h-5 flex items-center justify-center">{socialIcons.whatsapp}</span>
+                  <span>Join WhatsApp</span>
+                </a>
               </div>
 
               <div className="mt-8 pt-8 border-t border-white/5">
