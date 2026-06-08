@@ -18,18 +18,39 @@ export default function ApplyPage() {
   });
 
   const [status, setStatus] = useState<null | "success" | "error">(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   function update<K extends keyof typeof form>(key: K, value: string) {
     setForm((s) => ({ ...s, [key]: value }));
   }
 
+  function validate() {
+    const e: Record<string, string> = {};
+    if (!form.firstName.trim()) e.firstName = "First name is required.";
+    if (!form.lastName.trim()) e.lastName = "Last name is required.";
+    if (!form.email.trim()) e.email = "Email is required.";
+    else if (!/^\S+@\S+\.\S+$/.test(form.email)) e.email = "Enter a valid email address.";
+    if (!form.why.trim()) e.why = "Tell us why you want to join BVA.";
+    if (!form.role.trim()) e.role = "Please select an internship role.";
+    if (!form.level.trim()) e.level = "Please select your experience level.";
+    if (!form.availability.trim()) e.availability = "Please select your availability.";
+    return e;
+  }
+
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     // Basic validation
-    if (!form.firstName || !form.lastName || !form.email || !form.why) {
+    const validation = validate();
+    if (Object.keys(validation).length > 0) {
+      setErrors(validation);
       setStatus("error");
+      // focus the first invalid field
+      const first = Object.keys(validation)[0];
+      const el = document.getElementById(first) || document.getElementById(`${first}-select`);
+      if (el && (el as HTMLElement).focus) (el as HTMLElement).focus();
       return;
     }
+    setErrors({});
 
     try {
       // Using Formspree endpoint (user should replace with their own)
@@ -91,8 +112,10 @@ export default function ApplyPage() {
                   required
                   value={form.firstName}
                   onChange={(e) => update("firstName", e.target.value)}
-                  className="input bg-transparent"
+                  id="firstName"
+                  className={`input bg-transparent ${errors.firstName ? "border-rose-500" : ""}`}
                 />
+                {errors.firstName && <div className="text-rose-400 text-sm mt-1">{errors.firstName}</div>}
               </label>
 
               <label className="flex flex-col">
@@ -101,8 +124,10 @@ export default function ApplyPage() {
                   required
                   value={form.lastName}
                   onChange={(e) => update("lastName", e.target.value)}
-                  className="input bg-transparent"
+                  id="lastName"
+                  className={`input bg-transparent ${errors.lastName ? "border-rose-500" : ""}`}
                 />
+                {errors.lastName && <div className="text-rose-400 text-sm mt-1">{errors.lastName}</div>}
               </label>
             </div>
 
@@ -114,8 +139,10 @@ export default function ApplyPage() {
                   type="email"
                   value={form.email}
                   onChange={(e) => update("email", e.target.value)}
-                  className="input bg-transparent"
+                  id="email"
+                  className={`input bg-transparent ${errors.email ? "border-rose-500" : ""}`}
                 />
+                {errors.email && <div className="text-rose-400 text-sm mt-1">{errors.email}</div>}
               </label>
 
               <label className="flex flex-col">
@@ -123,6 +150,7 @@ export default function ApplyPage() {
                 <input
                   value={form.phone}
                   onChange={(e) => update("phone", e.target.value)}
+                  id="phone"
                   className="input bg-transparent"
                 />
               </label>
@@ -143,7 +171,10 @@ export default function ApplyPage() {
                   value={form.role}
                   onChange={(v) => update("role", v)}
                   name="role"
+                  ariaDescribedBy={errors.role ? "role-error" : undefined}
+                  ariaInvalid={!!errors.role}
                 />
+                {errors.role && <div id="role-error" className="text-rose-400 text-sm mt-1">{errors.role}</div>}
               </label>
 
               <label className="flex flex-col">
@@ -153,7 +184,10 @@ export default function ApplyPage() {
                   value={form.level}
                   onChange={(v) => update("level", v)}
                   name="level"
+                  ariaDescribedBy={errors.level ? "level-error" : undefined}
+                  ariaInvalid={!!errors.level}
                 />
+                {errors.level && <div id="level-error" className="text-rose-400 text-sm mt-1">{errors.level}</div>}
               </label>
             </div>
 
@@ -164,8 +198,10 @@ export default function ApplyPage() {
                   value={form.why}
                   onChange={(e) => update("why", e.target.value)}
                   rows={5}
-                  className="input bg-transparent"
+                  id="why"
+                  className={`input bg-transparent ${errors.why ? "border-rose-500" : ""}`}
                 />
+                {errors.why && <div className="text-rose-400 text-sm mt-1">{errors.why}</div>}
             </label>
 
             <label className="flex flex-col">
@@ -175,6 +211,7 @@ export default function ApplyPage() {
                   value={form.built}
                   onChange={(e) => update("built", e.target.value)}
                   rows={3}
+                  id="built"
                   className="input bg-transparent"
                 />
             </label>
@@ -182,7 +219,7 @@ export default function ApplyPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="flex flex-col">
                 <span className="text-sm text-neutral-300 mb-1">Portfolio / GitHub / Link</span>
-                <input value={form.link} onChange={(e) => update("link", e.target.value)} className="input bg-transparent" />
+                <input value={form.link} onChange={(e) => update("link", e.target.value)} id="link" className="input bg-transparent" />
               </label>
 
               <label className="flex flex-col">
@@ -192,7 +229,10 @@ export default function ApplyPage() {
                   value={form.availability}
                   onChange={(v) => update("availability", v)}
                   name="availability"
+                  ariaDescribedBy={errors.availability ? "availability-error" : undefined}
+                  ariaInvalid={!!errors.availability}
                 />
+                {errors.availability && <div id="availability-error" className="text-rose-400 text-sm mt-1">{errors.availability}</div>}
               </label>
             </div>
 
@@ -208,7 +248,7 @@ export default function ApplyPage() {
             <div className="mt-4 text-green-400">Application received. Now go build something while we review it.</div>
           )}
 
-          {status === "error" && (
+          {status === "error" && Object.keys(errors).length === 0 && (
             <div className="mt-4 text-rose-400">Please fill all required fields or try again later.</div>
           )}
         </div>

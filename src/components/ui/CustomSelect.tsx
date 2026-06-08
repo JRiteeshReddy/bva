@@ -10,6 +10,8 @@ interface CustomSelectProps {
   name?: string;
   required?: boolean;
   className?: string;
+  ariaDescribedBy?: string;
+  ariaInvalid?: boolean;
 }
 
 export default function CustomSelect({
@@ -19,6 +21,8 @@ export default function CustomSelect({
   id = "custom-select",
   name,
   className = "",
+  ariaDescribedBy,
+  ariaInvalid,
 }: CustomSelectProps) {
   const [open, setOpen] = useState(false);
   const [highlighted, setHighlighted] = useState(() => {
@@ -93,6 +97,8 @@ export default function CustomSelect({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={`${id}-list`}
+        aria-describedby={ariaDescribedBy}
+        aria-invalid={ariaInvalid}
         onClick={toggleOpen}
         onKeyDown={handleKeyDown}
         ref={buttonRef}
@@ -138,7 +144,7 @@ export default function CustomSelect({
         </div>
       )}
 
-      {name && <input type="hidden" name={name} value={value} />}
+      {name && <input type="hidden" name={name} value={value} aria-hidden />}
     </div>
   );
 }
