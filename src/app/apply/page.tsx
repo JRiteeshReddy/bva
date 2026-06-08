@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import CustomSelect from "@/components/ui/CustomSelect";
 
 export default function ApplyPage() {
   const [form, setForm] = useState({
@@ -130,33 +131,29 @@ export default function ApplyPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="flex flex-col">
                 <span className="text-sm text-neutral-300 mb-1">Internship Role *</span>
-                <select
-                  required
+                <CustomSelect
+                  options={[
+                    "AI Builder Intern",
+                    "Full Stack / Vibe Developer Intern",
+                    "UI/UX Design Intern",
+                    "Growth / Marketing Intern",
+                    "Content / Media Intern",
+                    "Community / Operations Intern",
+                  ]}
                   value={form.role}
-                  onChange={(e) => update("role", e.target.value)}
-                  className="input bg-transparent"
-                >
-                  <option>AI Builder Intern</option>
-                  <option>Full Stack / Vibe Developer Intern</option>
-                  <option>UI/UX Design Intern</option>
-                  <option>Growth / Marketing Intern</option>
-                  <option>Content / Media Intern</option>
-                  <option>Community / Operations Intern</option>
-                </select>
+                  onChange={(v) => update("role", v)}
+                  name="role"
+                />
               </label>
 
               <label className="flex flex-col">
                 <span className="text-sm text-neutral-300 mb-1">Experience Level *</span>
-                <select
-                  required
+                <CustomSelect
+                  options={["Beginner", "Intermediate", "Advanced"]}
                   value={form.level}
-                  onChange={(e) => update("level", e.target.value)}
-                  className="input bg-transparent"
-                >
-                  <option>Beginner</option>
-                  <option>Intermediate</option>
-                  <option>Advanced</option>
-                </select>
+                  onChange={(v) => update("level", v)}
+                  name="level"
+                />
               </label>
             </div>
 
@@ -190,16 +187,12 @@ export default function ApplyPage() {
 
               <label className="flex flex-col">
                 <span className="text-sm text-neutral-300 mb-1">Availability *</span>
-                <select
-                  required
+                <CustomSelect
+                  options={["5-10 hrs/week", "10-20 hrs/week", "20+ hrs/week"]}
                   value={form.availability}
-                  onChange={(e) => update("availability", e.target.value)}
-                  className="input bg-transparent"
-                >
-                  <option>5-10 hrs/week</option>
-                  <option>10-20 hrs/week</option>
-                  <option>20+ hrs/week</option>
-                </select>
+                  onChange={(v) => update("availability", v)}
+                  name="availability"
+                />
               </label>
             </div>
 

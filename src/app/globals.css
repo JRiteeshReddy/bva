@@ -173,6 +173,17 @@ body {
   accent-color: rgba(99,102,241,0.95);
 }
 
+/* Custom select button style harmonization */
+.form-dark .input.w-full.flex.items-center.justify-between {
+  padding: 0.6rem 0.75rem;
+}
+
+.form-dark .input svg { opacity: 0.9 }
+
+/* Styles for the custom dropdown list */
+.form-dark .shadow-lg { box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+
+
 /* Ensure select dropdown itself uses dark theme where possible */
 .form-dark select.input option {
   background: #050505;
