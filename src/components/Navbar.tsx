@@ -47,10 +47,7 @@ export default function Navbar() {
         className="relative mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 outline-glass backdrop-blur-2xl border"
       >
         <a href="#" className="relative z-10 flex items-center gap-3 group shrink-0">
-          <img src="/bva.png" alt="BVA" className="w-8 h-8 object-contain" />
-          <span className="font-bold text-base tracking-tight text-white group-hover:text-white/80 transition-colors">
-            BVA
-          </span>
+          <img src="/bva.png" alt="BVA" className="w-12 h-12 object-contain" />
         </a>
 
         <ul className="relative z-10 hidden md:flex items-center gap-6 lg:gap-8">
