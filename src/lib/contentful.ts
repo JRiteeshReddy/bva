@@ -1,4 +1,4 @@
-import { createClient, type EntryFieldTypes, type EntrySkeletonType } from "contentful";
+import { createClient } from "contentful";
 
 export interface ContentfulProject {
   id: string;
@@ -8,14 +8,6 @@ export interface ContentfulProject {
   image: string;
   link: string;
 }
-
-type ProjectSkeleton = EntrySkeletonType<{
-  title: EntryFieldTypes.Symbol;
-  by: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
-  description: EntryFieldTypes.Text;
-  demo: EntryFieldTypes.AssetLink;
-  url: EntryFieldTypes.Symbol;
-}, "bvAsite">;
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,
@@ -31,14 +23,14 @@ const previewClient = createClient({
 export async function getProjects(preview = false): Promise<ContentfulProject[]> {
   try {
     const activeClient = preview ? previewClient : client;
-    const res = await activeClient.getEntries<ProjectSkeleton>({
+    const res = await activeClient.getEntries({
       content_type: "bvAsite",
-    }, {
+    } as any, {
       next: { tags: ["projects"], revalidate: 60 },
     });
 
     return res.items.map((item) => {
-      const f = item.fields;
+      const f = item.fields as any;
       const demoAsset = f.demo && "fields" in f.demo ? f.demo : null;
       const imageUrl = demoAsset?.fields?.file?.url;
       return {
