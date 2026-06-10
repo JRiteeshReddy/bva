@@ -61,9 +61,9 @@ export default function Hero() {
           className="mt-20 flex items-center justify-center gap-8 md:gap-16 text-center"
         >
           {[
-            { value: "500+", label: "Members" },
-            { value: "50+", label: "Projects" },
-            { value: "20+", label: "Events" },
+            { value: "300+", label: "Members" },
+            { value: "15+", label: "Projects" },
+            { value: "Monthly", label: "Events" },
           ].map((stat) => (
             <div key={stat.label}>
               <div className="text-2xl md:text-3xl font-bold gradient-text">{stat.value}</div>
