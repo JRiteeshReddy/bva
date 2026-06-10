@@ -33,6 +33,8 @@ export async function getProjects(preview = false): Promise<ContentfulProject[]>
     const activeClient = preview ? previewClient : client;
     const res = await activeClient.getEntries<ProjectSkeleton>({
       content_type: "bvAsite",
+    }, {
+      next: { tags: ["projects"], revalidate: 60 },
     });
 
     return res.items.map((item) => {
