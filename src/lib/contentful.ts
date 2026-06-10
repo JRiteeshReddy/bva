@@ -11,7 +11,7 @@ export interface ContentfulProject {
 
 type ProjectSkeleton = EntrySkeletonType<{
   title: EntryFieldTypes.Symbol;
-  by: EntryFieldTypes.Array;
+  by: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
   description: EntryFieldTypes.Text;
   demo: EntryFieldTypes.AssetLink;
   url: EntryFieldTypes.Symbol;
