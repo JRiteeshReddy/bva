@@ -113,7 +113,7 @@ export default function About() {
               </div>
               <div>
                 <div className="text-3xl md:text-4xl font-bold text-white">
-                  20+
+                  15+
                 </div>
                 <div className="text-xs text-neutral-500 mt-1 leading-tight">
                   projects shipped
