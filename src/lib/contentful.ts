@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createClient } from "contentful";
 
 export interface ContentfulProject {
@@ -25,23 +26,19 @@ export async function getProjects(preview = false): Promise<ContentfulProject[]>
     const activeClient = preview ? previewClient : client;
     const res = await activeClient.getEntries({
       content_type: "bvAsite",
-    } as any, {
-      next: { tags: ["projects"], revalidate: 60 },
     });
 
     return res.items.map((item) => {
-      const f = item.fields as any;
-      const demoAsset = f.demo && "fields" in f.demo ? f.demo : null;
-      const imageUrl = demoAsset?.fields?.file?.url;
+      const f: any = item.fields;
+      const imageUrl: string | undefined = f.demo?.fields?.file?.url;
+      const by: string[] = Array.isArray(f.by) ? f.by : [];
       return {
         id: item.sys.id,
-        title: f.title ?? "Untitled",
-        creator: Array.isArray(f.by) ? f.by.join(", ") : (f.by ?? "Anonymous"),
-        description: f.description ?? "",
-        image: imageUrl
-          ? `https:${imageUrl}`
-          : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
-        link: f.url ?? "#",
+        title: String(f.title ?? "Untitled"),
+        creator: by.join(", ") || "Anonymous",
+        description: String(f.description ?? ""),
+        image: imageUrl ? `https:${imageUrl}` : "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+        link: String(f.url ?? "#"),
       };
     });
   } catch (error) {
