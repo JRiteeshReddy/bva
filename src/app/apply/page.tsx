@@ -87,11 +87,11 @@ export default function ApplyPage() {
         try {
           const data = await res.json();
           if (data && data.error) setErrors({ form: data.error });
-        } catch (err) {
+        } catch {
           // ignore
         }
       }
-    } catch (err) {
+    } catch {
       setStatus("error");
     }
   }

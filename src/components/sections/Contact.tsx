@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { SectionHeading, FadeIn } from "@/components/ui/SectionHeading";
-import { socialLinks } from "@/data/site-data";
 
 const socialIcons: Record<string, React.ReactNode> = {
   twitter: (
@@ -64,7 +63,7 @@ export default function Contact() {
         const data = await res.json().catch(() => null);
         setErrors((data && data.error) || "Submission failed. Please try again.");
       }
-    } catch (err) {
+    } catch {
       setErrors("Submission failed. Please try again.");
     } finally {
       setSubmitting(false);
@@ -81,7 +80,7 @@ export default function Contact() {
           setMessageDefault("I\'d like to apply for the BVA Internship Program. Here's a short intro about me:\n\n");
         }
       }
-    } catch (e) {
+    } catch {
       // ignore
     }
   }, []);

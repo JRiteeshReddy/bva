@@ -22,9 +22,16 @@ const client = createClient({
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
 });
 
-export async function getProjects(): Promise<ContentfulProject[]> {
+const previewClient = createClient({
+  space: process.env.CONTENTFUL_SPACE_ID!,
+  accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN!,
+  host: "preview.contentful.com",
+});
+
+export async function getProjects(preview = false): Promise<ContentfulProject[]> {
   try {
-    const res = await client.getEntries<ProjectSkeleton>({
+    const activeClient = preview ? previewClient : client;
+    const res = await activeClient.getEntries<ProjectSkeleton>({
       content_type: "project",
     });
 
