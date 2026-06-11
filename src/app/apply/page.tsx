@@ -105,6 +105,9 @@ export default function ApplyPage() {
             This is a build-first internship. Selected candidates will be expected to ship real
             projects.
           </p>
+          <p className="text-neutral-400 mb-6">
+            BVA runs structured project-based internship programs under mentorship.
+          </p>
 
           <form onSubmit={onSubmit} className="space-y-4">
             <input type="hidden" name="form_source" value="internship" />

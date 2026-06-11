@@ -53,6 +53,9 @@ export default function Internship() {
                   Work alongside experienced vibe coders, contribute to open-source projects, and grow your
                   portfolio while making an impact.
                 </p>
+                <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+                  BVA runs structured project-based internship programs under mentorship.
+                </p>
                 <p className="text-neutral-500 text-sm leading-relaxed mb-8">
                   Open to students and early-career builders in Bangalore. Remote-friendly with weekly
                   in-person sessions.
