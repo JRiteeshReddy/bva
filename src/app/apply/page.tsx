@@ -101,13 +101,15 @@ export default function ApplyPage() {
       <div className="max-w-3xl w-full">
         <div className="card-glow rounded-2xl p-8 form-dark">
           <h1 className="text-2xl font-bold mb-2 gradient-text">Apply — BVA Internship</h1>
-          <p className="text-neutral-400 mb-6">
-            This is a build-first internship. Selected candidates will be expected to ship real
-            projects.
+          <p className="text-neutral-400 mb-4">
+            Build-first internship. Ship real projects. Get mentored by active builders.
           </p>
-          <p className="text-neutral-400 mb-6">
-            BVA runs structured project-based internship programs under mentorship.
-          </p>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm mb-6">
+            <p><span className="text-neutral-500">Duration:</span> <span className="text-neutral-300">Min. 6 weeks</span></p>
+            <p><span className="text-neutral-500">Hours:</span> <span className="text-neutral-300">10–20 hrs/week</span></p>
+            <p><span className="text-neutral-500">Format:</span> <span className="text-neutral-300">Remote-first</span></p>
+            <p><span className="text-neutral-500">Certificate:</span> <span className="text-neutral-300">On completion</span></p>
+          </div>
 
           <form onSubmit={onSubmit} className="space-y-4">
             <input type="hidden" name="form_source" value="internship" />
@@ -212,6 +214,7 @@ export default function ApplyPage() {
                   id="why"
                   className={`input bg-transparent ${errors.why ? "border-rose-500" : ""}`}
                 />
+                <span className="text-xs text-neutral-500 mt-1">Tell us what excites you about building. What do you want to learn or ship?</span>
                 {errors.why && <div className="text-rose-400 text-sm mt-1">{errors.why}</div>}
             </label>
 
@@ -226,12 +229,14 @@ export default function ApplyPage() {
                   id="built"
                   className="input bg-transparent"
                 />
+                <span className="text-xs text-neutral-500 mt-1">GitHub repos, live projects, prototypes — anything that shows you ship.</span>
             </label>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="flex flex-col">
                 <span className="text-sm text-neutral-300 mb-1">Portfolio / GitHub / Link</span>
                 <input name="link" value={form.link} onChange={(e) => update("link", e.target.value)} id="link" className="input bg-transparent" />
+                <span className="text-xs text-neutral-500 mt-1">Optional but recommended — strengthens your application.</span>
               </label>
 
               <label className="flex flex-col">
@@ -249,15 +254,16 @@ export default function ApplyPage() {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="text-sm text-neutral-400">This is a build-first internship.</div>
+              <div className="text-xs text-neutral-500">Selection: Application → Review → Intro Call → Onboard</div>
               <button className="bg-gradient-to-r from-white/90 to-neutral-400 text-black px-6 py-2 rounded-full font-semibold" type="submit">
                 Apply Now
               </button>
             </div>
+            <p className="text-xs text-neutral-600 text-right">Completion = project + submission + evaluation</p>
           </form>
 
           {status === "success" && (
-            <div className="mt-4 text-green-400">Application received. Now go build something while we review it.</div>
+            <div className="mt-4 text-green-400">Application received. We review every submission — you'll hear from us within a week.</div>
           )}
 
           {status === "error" && Object.keys(errors).length === 0 && (

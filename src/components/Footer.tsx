@@ -29,7 +29,7 @@ export default function Footer() {
           </ul>
 
           <p className="text-xs text-neutral-600">
-            &copy; {new Date().getFullYear()} BVA. All rights reserved.
+            &copy; {new Date().getFullYear()} Bangalore Vibecoders Association (BVA). A student-led initiative.
           </p>
         </div>
       </div>

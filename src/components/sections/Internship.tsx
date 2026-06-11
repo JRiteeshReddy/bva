@@ -49,16 +49,17 @@ export default function Internship() {
                   <span className="gradient-text">BVA Internship Program</span>
                 </h2>
                 <p className="text-neutral-400 text-base md:text-lg leading-relaxed mb-4">
-                  Join our internship program and get hands-on experience building real products with AI.
-                  Work alongside experienced vibe coders, contribute to open-source projects, and grow your
-                  portfolio while making an impact.
+                  A project-based internship under active mentorship. Build real products,
+                  ship to production, and grow your portfolio alongside experienced builders.
                 </p>
-                <p className="text-neutral-400 text-sm leading-relaxed mb-4">
-                  BVA runs structured project-based internship programs under mentorship.
-                </p>
-                <p className="text-neutral-500 text-sm leading-relaxed mb-8">
-                  Open to students and early-career builders in Bangalore. Remote-friendly with weekly
-                  in-person sessions.
+                <div className="space-y-1.5 mb-4 text-sm text-neutral-400">
+                  <p><span className="text-neutral-300 font-medium">Duration:</span> Minimum 6 weeks</p>
+                  <p><span className="text-neutral-300 font-medium">Time Commitment:</span> 10–20 hrs/week</p>
+                  <p><span className="text-neutral-300 font-medium">Format:</span> Remote-first with optional in-person sessions in Bangalore</p>
+                  <p><span className="text-neutral-300 font-medium">Mentorship:</span> Each intern is paired with a dedicated mentor for weekly reviews and guidance</p>
+                </div>
+                <p className="text-neutral-500 text-xs leading-relaxed mb-8">
+                  Certificate issued upon completion. Selection is limited and performance-based.
                 </p>
                 <GlowButton href="/apply" variant="primary" target="_blank" rel="noopener noreferrer">
                   Apply Now
